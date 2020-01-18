@@ -96,15 +96,15 @@ div.verbose div.content {
 }
 
 #menu_index {
-    float: left;
-    margin-top: 5px;
-    padding-left: 5px;
     text-align: left;
-    width: 300px;
-    /*height: 75%;*/
-    position: fixed;
+    width: 25%;
+    height: 95vh;
+    min-height: 200px;
     overflow: auto;
-    z-index: 1;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding: 0 15px 15px 15px;
 }
 
 #menu > a {
@@ -145,12 +145,19 @@ div.verbose div.content {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    float: left;
-    margin: 5px;
-    margin-left: 10px;
-    padding: 0 10px 10px 10px;
-    width: 80%;
-    padding-left: 300px;
+    padding: 0 15px 15px 15px;
+    width: 75%;
+    height: 100%;
+    overflow-x: auto;
+}
+
+.wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .linenos {
@@ -255,8 +262,9 @@ HTML_HEAD = """
     <div id="header">
       <h1>Cppcheck report - %s: %s </h1>
     </div>
-    <div id="menu" dir="rtl">
-     <p id="filename"><a href="index.html">Defects:</a> %s</p>
+    <div class="wrapper">
+      <div id="menu" dir="rtl">
+       <p id="filename"><a href="index.html">Defects:</a> %s</p>
 """
 
 HTML_HEAD_END = """
@@ -265,6 +273,7 @@ HTML_HEAD_END = """
 """
 
 HTML_FOOTER = """
+      </div> <!-- /.wrapper -->
     </div>
     <div id="footer">
       <p>
