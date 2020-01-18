@@ -99,7 +99,7 @@ div.verbose div.content {
 
 #menu_index {
     text-align: left;
-    width: 25%;
+    width: 350px;
     height: 95vh;
     min-height: 200px;
     overflow: auto;
@@ -148,7 +148,7 @@ div.verbose div.content {
     -moz-box-sizing: content-box;
     box-sizing: content-box;
     padding: 0 15px 15px 15px;
-    width: 75%;
+    width: calc(100% - 350px);
     height: 100%;
     overflow-x: auto;
 }
@@ -265,7 +265,7 @@ HTML_HEAD = """
   </head>
   <body>
     <div id="header">
-      <h1>Cppcheck report - %s: %s </h1>
+      <h1>Cppcheck report - %s: %s</h1>
     </div>
     <div class="wrapper">
       <div id="menu" dir="rtl">
@@ -282,10 +282,10 @@ HTML_FOOTER = """
     </div>
     <div id="footer">
       <p>
-       Cppcheck %s - a tool for static C/C++ code analysis<br>
-       <br>
-       Internet: <a href="http://cppcheck.net">http://cppcheck.net</a><br>
-       IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a><br>
+        Cppcheck %s - a tool for static C/C++ code analysis<br>
+        <br>
+        Internet: <a href="http://cppcheck.net">http://cppcheck.net</a><br>
+        IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a><br>
       </p>
     </div>
   </body>
