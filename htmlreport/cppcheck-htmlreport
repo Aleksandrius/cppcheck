@@ -194,10 +194,12 @@ HTML_HEAD = """
     <script>
       function getStyle(el, styleProp) {
         var y;
-        if (el.currentStyle)
+        if (el.currentStyle) {
           y = el.currentStyle[styleProp];
-        else if (window.getComputedStyle)
+        } else if (window.getComputedStyle) {
           y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+
         return y;
       }
 
@@ -214,11 +216,11 @@ HTML_HEAD = """
         }
       }
 
-      function init_expandables() {
-        var elts = document.querySelectorAll(".expandable");
+      function initExpandables() {
+        var elements = document.querySelectorAll(".expandable");
 
-        for (var i = 0, len = elts.length; i < len; i++) {
-          var el = elts[i];
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var el = elements[i];
           var clickable = el.querySelector("span");
           var marker = clickable.querySelector(".marker");
           var content = el.querySelector(".content");
@@ -230,7 +232,7 @@ HTML_HEAD = """
         }
       }
 
-      function set_class_display(c, st) {
+      function setDisplayClass(c, st) {
         var elements = document.querySelectorAll("." + c);
 
         for (var i = 0, len = elements.length; i < len; i++) {
@@ -238,26 +240,27 @@ HTML_HEAD = """
         }
       }
 
-      function toggle_class_visibility(id) {
+      function toggleVisibilityClass(id) {
         var box = document.getElementById(id);
-        set_class_display(id, box.checked ? "" : "none");
+        setDisplayClass(id, box.checked ? "" : "none");
       }
 
-      function toggle_all() {
-        var elts = document.querySelectorAll("input");
+      function toggleAll() {
+        var elements = document.querySelectorAll("input");
 
-        for (var i = 1; i < elts.length; i++) {
-          var el = elts[i];
+        for (var i = 1, len = elements.length; i < len; i++) {
+          var el = elements[i];
+
           if (el.checked) {
             el.checked = false;
           } else {
             el.checked = true;
           }
-          toggle_class_visibility(el.id);
+
+          toggleVisibilityClass(el.id);
         }
       }
-
-      window.addEventListener("load", init_expandables);
+      window.addEventListener("load", initExpandables);
     </script>
   </head>
   <body>
@@ -597,13 +600,13 @@ if __name__ == '__main__':
         except IndexError:
             cnt_min = 0
 
-        stat_fmt = "\n            <tr><td><input type=\"checkbox\" onclick=\"toggle_class_visibility(this.id)\" id=\"{}\" name=\"{}\" checked></td><td>{}</td><td>{}</td></tr>"
+        stat_fmt = "\n            <tr><td><input type=\"checkbox\" onclick=\"toggleVisibilityClass(this.id)\" id=\"{}\" name=\"{}\" checked></td><td>{}</td><td>{}</td></tr>"
         for occurrences in reversed(range(cnt_min, cnt_max + 1)):
             for _id in [k for k, v in sorted(counter.items()) if v == occurrences]:
                 stat_html.append(stat_fmt.format(_id, _id, dict(counter.most_common())[_id], _id))
 
         output_file.write(HTML_HEAD.replace('id="menu" dir="rtl"', 'id="menu_index"', 1).replace("Defects:", "Defect summary;", 1) % (options.title, '', options.title, '', ''))
-        output_file.write('\n       <label><input type="checkbox" onclick="toggle_all()" checked> Toggle all</label>')
+        output_file.write('\n       <label><input type="checkbox" onclick="toggleAll()" checked> Toggle all</label>')
         output_file.write('\n       <table>')
         output_file.write('\n           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>')
         output_file.write(''.join(stat_html))
