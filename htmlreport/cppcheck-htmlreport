@@ -260,7 +260,8 @@ HTML_HEAD = """
           toggleVisibilityClass(el.id);
         }
       }
-      window.addEventListener("load", initExpandables);
+
+      initExpandables();
     </script>
   </head>
   <body>
